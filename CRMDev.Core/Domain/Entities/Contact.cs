@@ -8,7 +8,7 @@ namespace CRMDev.Core.Domain.Entities
 {
     public class Contact : BaseEntity
     {
-        public Contact(string name, string email, string phoneNumber, string occupation, string document, string address, string notes)
+        public Contact(string name, string email, string phoneNumber, string occupation, string document, string address)
         {
             Name = name;
             Email = email;
@@ -17,6 +17,8 @@ namespace CRMDev.Core.Domain.Entities
             Document = document;
             Address = address;
             Notes = new List<Note>();
+            Opportunities = new List<Opportunity>();
+            //WorkFields = new List<FieldWork>();
             IsDeleted = false;
         }
 
@@ -24,9 +26,22 @@ namespace CRMDev.Core.Domain.Entities
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public string Occupation { get; private set; }
-        public string? Document { get; private set; }
-        public string? Address { get; private set; }
+        public string Document { get; private set; }
+        public string Address { get; private set; }
         public List<Note> Notes { get; private set; }
+        public List<ContactFieldWork> WorkFields { get; private set; }
+        public List<Opportunity> Opportunities { get; private set; }
         public bool IsDeleted { get; private set; }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
+        public void Update(string email, string phoneNumber, string occupation, string address)
+        {
+            Email=email;
+            PhoneNumber=phoneNumber;
+            Occupation=occupation;
+            Address=address;
+        }
     }
 }

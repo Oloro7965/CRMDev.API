@@ -12,9 +12,18 @@ namespace CRMDev.Core.Domain.Entities
         {
             Title = title;
             Description = description;
+            IsDeleted = false;
         }
 
         public string Title { get;private set; }
         public string Description { get; private set; }
+        public bool IsDeleted { get; private set; }
+        public void Delete() {
+            IsDeleted = true;
+        }
+        public void Update(string description)
+        {
+            Description = description;
+        }
     }
 }

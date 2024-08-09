@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CRMDev.Application\CRMDev.Application.csproj" />
     <ProjectReference Include="..\CRMDev.Core\CRMDev.Core.csproj" />
     <ProjectReference Include="..\CRMDev.Infraestructure\CRMDev.Infraestructure.csproj" />
   </ItemGroup>

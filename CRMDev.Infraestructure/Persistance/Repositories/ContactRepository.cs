@@ -32,7 +32,8 @@ namespace CRMDev.Infraestructure.Persistance.Repositories
 
         public async Task<Contact> GetByIdAsync(Guid id)
         {
-            return await _dbcontext.Contacts.FirstOrDefaultAsync(u => u.Id == id);
+            return await _dbcontext.Contacts.Where(c=>c.IsDeleted.Equals(false))
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task SaveChangesAsync()

@@ -30,6 +30,12 @@ namespace CRMDev.Infraestructure.Persistance.Repositories
             return await _dbcontext.WorkFields.ToListAsync();
         }
 
+        public async Task<FieldWork> GetByIdAsync(Guid id)
+        {
+            return await _dbcontext.WorkFields.SingleOrDefaultAsync(u => u.Id == id);
+            //usar singleOrDefault
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbcontext.SaveChangesAsync();

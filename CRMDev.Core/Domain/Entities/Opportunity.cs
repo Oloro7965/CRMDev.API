@@ -19,6 +19,8 @@ namespace CRMDev.Core.Domain.Entities
         public EStatus Status { get; private set; }
         public EStage Stage { get; private set; }
         public Guid ContactId { get; private set; }
+        public Contact contact { get; private set; }
+        public bool IsDeleted { get; private set; }
         public Opportunity(string title,string description,DateTime dueDate,decimal costs,string scope,string support,Guid contactId)
         {
             Title = title;
@@ -30,6 +32,20 @@ namespace CRMDev.Core.Domain.Entities
             ContactId = contactId;
             Status = EStatus.Pending;
             Stage = EStage.ContactMade;
+            IsDeleted = false;
+        }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
+        public void Update(string title,string description, DateTime dueDate, decimal costs, string scope, string support)
+        {
+            Title=title;
+            Description=description;
+            DueDate=dueDate;
+            Costs = costs;
+            Scope = scope; 
+            IncludedSupport = support;
         }
     }
 }

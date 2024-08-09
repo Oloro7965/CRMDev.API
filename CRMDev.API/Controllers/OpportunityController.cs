@@ -1,5 +1,9 @@
-﻿using MediatR;
+﻿using CRMDev.Application.Commands.CreateOpportunityCommand;
+using CRMDev.Application.Commands.DeleteFieldWorkCommand;
+using CRMDev.Application.Commands.UpdateOpportunityCommand;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CRMDev.API.Controllers
 {
@@ -7,11 +11,11 @@ namespace CRMDev.API.Controllers
     [Route("api/Opportunity")]
     public class OpportunityController : ControllerBase
     {
-        private readonly IMediator _mediatR;
+        private readonly IMediator _mediator;
 
-        public OpportunityController(IMediator mediatR)
+        public OpportunityController(IMediator mediator)
         {
-            _mediatR = mediatR;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -27,21 +31,37 @@ namespace CRMDev.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> CreateOpportunity([FromBody] CreateOpportunityCommand command)
         {
-            return Ok();
+            var OpportunityId = await _mediator.Send(command);
+
+            return Ok(OpportunityId);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put()
+        public async Task<IActionResult> Put([FromBody] UpdateOpportunityCommand command)
         {
-            return Ok();
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var command = new DeleteFieldWorkCommand(id);
+
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+
             return Ok();
+
         }
     }
 }

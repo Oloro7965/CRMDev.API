@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace CRMDev.Core.Domain.Entities
 {
-    public class Note : BaseEntity
+    public class ContactFieldWork:BaseEntity
     {
-        public Note(string content)
+        public ContactFieldWork(Guid contactId, Guid fieldWorkId)
         {
-            Content = content;
+            ContactId = contactId;
+            FieldWorkId = fieldWorkId;
         }
 
-        public string Content { get; private set; }
         public Guid ContactId { get; private set; }
-        public Contact contact { get; private set; }
+        public Guid FieldWorkId { get; private set; }
     }
 }
