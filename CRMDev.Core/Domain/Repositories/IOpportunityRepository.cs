@@ -10,8 +10,12 @@ namespace CRMDev.Core.Domain.Repositories
     public interface IOpportunityRepository
     {
         Task<List<Opportunity>> GetAllAsync();
+
         Task<Opportunity> GetByIdAsync(Guid id);
+
         Task AddAsync(Opportunity opportunity);
+
         Task SaveChangesAsync();
+
     }
 }

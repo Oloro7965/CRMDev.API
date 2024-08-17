@@ -21,10 +21,12 @@ namespace CRMDev.Application.Commands.DeleteOpportunityCommand
         public async Task<ResultViewModel> Handle(DeleteOpportunityCommand request, CancellationToken cancellationToken)
         {
             var opportunity = await _opportunityRepository.GetByIdAsync(request.Id);
+
             if (opportunity is null)
             {
                 return ResultViewModel.Error("Esta oportunidade não existe");
             }
+
             opportunity.Delete();
 
             await _opportunityRepository.SaveChangesAsync();

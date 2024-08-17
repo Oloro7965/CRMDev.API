@@ -11,13 +11,23 @@ namespace CRMDev.Core.Domain.Entities
         public FieldWork(string title, string description)
         {
             Title = title;
+
             Description = description;
+
             IsDeleted = false;
+
+            contacts = new List<Contact>();
+
         }
 
         public string Title { get;private set; }
+
         public string Description { get; private set; }
+
         public bool IsDeleted { get; private set; }
+
+        public List<Contact> contacts { get; private set; }
+
         public void Delete() {
             IsDeleted = true;
         }

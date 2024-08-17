@@ -22,10 +22,12 @@ namespace CRMDev.Application.Commands.UpdateContactCommand
         public async Task<ResultViewModel> Handle(UpdateContactCommand request, CancellationToken cancellationToken)
         {
             var contact = await _contactRepository.GetByIdAsync(request.Id);
+
             if (contact is null)
             {
                 return ResultViewModel.Error("Contato não existe");
             }
+
             contact.Update(request.Email, request.PhoneNumber, request.Occupation, request.Address);
 
             //_dbcontext.Update(user);  

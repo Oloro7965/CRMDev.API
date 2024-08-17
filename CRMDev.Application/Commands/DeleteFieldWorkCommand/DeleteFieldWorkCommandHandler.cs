@@ -21,10 +21,12 @@ namespace CRMDev.Application.Commands.DeleteFieldWorkCommand
         public async Task<ResultViewModel> Handle(DeleteFieldWorkCommand request, CancellationToken cancellationToken)
         {
             var FieldWork = await _fieldWorkRepository.GetByIdAsync(request.Id);
+
             if (FieldWork is null)
             {
                 return ResultViewModel.Error("Este campo de atuação não existe");
             }
+
             FieldWork.Delete();
 
             await _fieldWorkRepository.SaveChangesAsync();

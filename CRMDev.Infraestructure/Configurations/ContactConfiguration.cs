@@ -14,14 +14,17 @@ namespace CRMDev.Infraestructure.Configurations
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.HasKey(x => x.Id);
+
             builder.HasMany(x => x.Opportunities).
                 WithOne(x => x.contact).
                 HasForeignKey(x => x.ContactId).
                 OnDelete(DeleteBehavior.Restrict);
+
             builder.HasMany(x => x.Notes).
                 WithOne(x => x.contact).
                 HasForeignKey(x => x.ContactId).
                 OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

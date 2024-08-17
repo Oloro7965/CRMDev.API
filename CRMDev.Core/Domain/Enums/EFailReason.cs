@@ -11,5 +11,7 @@ namespace CRMDev.Core.Domain.Enums
         BudgetConstraints,
         NotInterested,
         DecisionDelay
+
     }
+
 }

@@ -10,8 +10,12 @@ namespace CRMDev.Core.Domain.Repositories
     public interface IFieldWorkRepository
     {
         Task<List<FieldWork>> GetAllAsync();
+
         Task<FieldWork> GetByIdAsync(Guid id);
+
         Task AddAsync(FieldWork field);
+
         Task SaveChangesAsync();
+
     }
 }

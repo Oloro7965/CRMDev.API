@@ -20,7 +20,7 @@ namespace CRMDev.Application.Commands.CreateNoteCommand
 
         public async Task<Guid> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
         {
-            var note = new Note(request.Content);
+            var note = new Note(request.Content,request.ContactId);
 
             await _noteRepository.AddAsync(note);
 

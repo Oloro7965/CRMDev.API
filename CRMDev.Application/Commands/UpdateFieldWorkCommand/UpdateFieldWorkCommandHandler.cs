@@ -21,10 +21,12 @@ namespace CRMDev.Application.Commands.UpdateFieldWorkCommand
         public async Task<ResultViewModel> Handle(UpdateFieldWorkCommand request, CancellationToken cancellationToken)
         {
             var fieldwork = await _fieldWorkRepository.GetByIdAsync(request.Id);
+
             if (fieldwork is null)
             {
                 return ResultViewModel.Error("Contato não existe");
             }
+
             fieldwork.Update(request.Description);
 
             //_dbcontext.Update(user);  

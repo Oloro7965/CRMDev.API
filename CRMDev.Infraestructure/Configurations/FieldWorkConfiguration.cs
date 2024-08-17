@@ -13,6 +13,12 @@ namespace CRMDev.Infraestructure.Configurations
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<FieldWork> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.HasMany(x => x.contacts).
+                WithOne(x => x.FieldWork).
+                HasForeignKey(x => x.FielWorkId).
+                OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

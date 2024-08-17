@@ -12,6 +12,7 @@ namespace CRMDev.Core.Domain.Repositories
         //Task<List<Note>> GetAllAsync();
         //Task<Contact> GetByIdAsync(Guid id);
         Task AddAsync(Note note);
+
         Task SaveChangesAsync();
     }
 }

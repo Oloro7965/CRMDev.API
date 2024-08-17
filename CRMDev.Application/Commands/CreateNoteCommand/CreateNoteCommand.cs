@@ -10,5 +10,7 @@ namespace CRMDev.Application.Commands.CreateNoteCommand
     public class CreateNoteCommand:IRequest<Guid>
     {
         public string Content { get;  set; }
+
+        public Guid ContactId { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace CRMDev.Infraestructure.Persistance.Repositories
         {
             await _dbcontext.Opportunities.AddAsync(opportunity);
 
-            await _dbcontext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task<List<Opportunity>> GetAllAsync()
@@ -32,7 +32,7 @@ namespace CRMDev.Infraestructure.Persistance.Repositories
 
         public async Task<Opportunity> GetByIdAsync(Guid id)
         {
-            return await _dbcontext.Opportunities.FirstOrDefaultAsync(u => u.Id == id);
+            return await _dbcontext.Opportunities.SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task SaveChangesAsync()

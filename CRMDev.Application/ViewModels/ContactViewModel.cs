@@ -19,9 +19,14 @@ namespace CRMDev.Application.ViewModels
         }
 
         public string Name { get; private set; }
+
         public string Email { get; private set; }
+
         public string PhoneNumber { get;private set; }
+
         public string Occupation { get; private set; }
+
         public List<Note> Notes { get; private set; }
+
     }
 }

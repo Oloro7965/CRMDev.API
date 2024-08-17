@@ -13,6 +13,7 @@ namespace CRMDev.Infraestructure.Configurations
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Note> builder)
         {
             builder.HasKey(x => x.Id);
+
         }
     }
 }

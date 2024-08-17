@@ -21,7 +21,7 @@ namespace CRMDev.Application.Commands.CreateContactCommand
         public async Task<Guid> Handle(CreateContactCommand request, CancellationToken cancellationToken)
         {
             var contact = new Contact(request.Name, request.Email, request.PhoneNumber, request.Occupation, 
-                request.Document, request.Address);
+                request.Document, request.Address,request.FielWorkId);
 
             await _contactRepository.AddAsync(contact);
 

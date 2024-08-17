@@ -2,6 +2,8 @@
 using CRMDev.Application.Commands.CreateNoteCommand;
 using CRMDev.Application.Commands.DeleteContactCommand;
 using CRMDev.Application.Commands.UpdateContactCommand;
+using CRMDev.Application.Queries.GetAllContacts;
+using CRMDev.Application.Queries.GetContact;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -21,19 +23,32 @@ namespace CRMDev.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllContacts()
+        public async Task<IActionResult> GetAllContacts()
         {
 
-            return Ok();
+            var Query = new GetAllContactsQuery();
+
+            var contacts = await _mediator.Send(Query);
+
+            return Ok(contacts);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetContactById(Guid id) {
-            return Ok();
+        public async Task<IActionResult> GetContactById(Guid id) {
+            var query = new GetContactQuery(id);
+
+            var contact = await _mediator.Send(query);
+
+            if (!contact.IsSuccess)
+            {
+                return BadRequest(contact.Message);
+            }
+
+            return Ok(contact);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateContact([FromBody] CreateContactCommand command)
+        public async Task<IActionResult> CreateContact(CreateContactCommand command)
         {
             var ContactId = await _mediator.Send(command);
 
@@ -41,14 +56,14 @@ namespace CRMDev.API.Controllers
         }
         [HttpPost]
         [Route("Note")]
-        public async Task<IActionResult> CreateNote([FromBody] CreateNoteCommand command)
+        public async Task<IActionResult> CreateNote(CreateNoteCommand command)
         {
             var NoteId = await _mediator.Send(command);
 
             return Ok(NoteId);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact([FromBody] UpdateContactCommand command)
+        public async Task<IActionResult> UpdateContact(UpdateContactCommand command)
         {
             //command.Id =id;
 
@@ -57,6 +72,7 @@ namespace CRMDev.API.Controllers
             {
                 return BadRequest(result.Message);
             }
+
             return NoContent();
         }
 

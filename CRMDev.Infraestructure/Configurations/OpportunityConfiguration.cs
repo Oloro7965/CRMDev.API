@@ -14,6 +14,8 @@ namespace CRMDev.Infraestructure.Configurations
         public void Configure(EntityTypeBuilder<Opportunity> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Costs).HasPrecision(18, 2);
         }
     }
 }

@@ -22,12 +22,20 @@ namespace CRMDev.Application.ViewModels
         }
 
         public string Title { get; private set; }
+
         public string Description { get; private set; }
+
         public DateTime DueDate { get; private set; }
+
         public decimal Costs { get; private set; }
+
         public string Scope { get; private set; }
+
         public string IncludedSupport { get; private set; }
+
         public EStatus Status { get; private set; }
+
         public EStage Stage { get; private set; }
+
     }
 }

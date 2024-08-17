@@ -21,6 +21,7 @@ namespace CRMDev.Application.Commands.DeleteContactCommand
         public async Task<ResultViewModel> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
             var contact = await _contactRepository.GetByIdAsync(request.Id);
+
             if (contact is null)
             {
                 return ResultViewModel.Error("Este Contato não existe");

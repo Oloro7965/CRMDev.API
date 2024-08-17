@@ -10,6 +10,7 @@ namespace CRMDev.Application.Commands.CreateFieldWorkCommand
     public class CreateFieldWorkCommand:IRequest<Guid>
     {
         public string Title { get; set; }
+
         public string Description { get;  set; }
     }
 }

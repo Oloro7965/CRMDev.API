@@ -1,6 +1,7 @@
 ﻿using CRMDev.Application.Commands.CreateFieldWorkCommand;
 using CRMDev.Application.Commands.DeleteFieldWorkCommand;
 using CRMDev.Application.Commands.UpdateFieldWorkCommand;
+using CRMDev.Application.Queries.GetAllFieldWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -20,9 +21,13 @@ namespace CRMDev.API.Controllers
         }
         //retirar o FromBody 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var Query = new GetAllFieldWorkQuery();
+
+            var Fields = await _mediator.Send(Query);
+
+            return Ok(Fields);
         }
         //[HttpGet("{id}")]
         //public IActionResult Get()
@@ -30,13 +35,13 @@ namespace CRMDev.API.Controllers
         //    return Ok();
         //}
         [HttpPost]
-        public async Task<IActionResult> CreateFieldWork([FromBody] CreateFieldWorkCommand command) {
+        public async Task<IActionResult> CreateFieldWork(CreateFieldWorkCommand command) {
             var FieldWorkId = await _mediator.Send(command);
 
             return Ok();
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateFieldWork([FromBody] UpdateFieldWorkCommand command)
+        public async Task<IActionResult> UpdateFieldWork(UpdateFieldWorkCommand command)
         {
             //command.Id = id;
 
