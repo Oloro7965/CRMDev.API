@@ -65,8 +65,7 @@ namespace CRMDev.API.Controllers
 
             return NoContent();
         }
-        [HttpPut("{id}")]
-        [Route("opportunityStage")]
+        [HttpPut("Stage/{id}")]
         public async Task<IActionResult> UpdateOpportunityStage(UpdateStageCommand command)
         {
             var result = await _mediator.Send(command);

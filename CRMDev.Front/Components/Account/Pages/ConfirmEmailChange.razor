@@ -1,0 +1,36 @@
+﻿@page "/Account/ConfirmEmailChange"
+
+@using System.Text
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
+
+
+
+<PageTitle>Confirm email change</PageTitle>
+
+<h1>Confirm email change</h1>
+
+<StatusMessage Message="@message" />
+
+@code {
+    private string? message;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromQuery]
+    private string? UserId { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Email { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Code { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+
+       
+    }
+}

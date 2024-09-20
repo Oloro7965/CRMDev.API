@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMDev.API", "CRMDev.API\CRMDev.API.csproj", "{044D28C2-A29B-45D4-8AA2-CDDD458F8191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMDev.API", "CRMDev.API\CRMDev.API.csproj", "{044D28C2-A29B-45D4-8AA2-CDDD458F8191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMDev.Core", "CRMDev.Core\CRMDev.Core.csproj", "{78F6F3DA-24A4-449C-BBBB-82A35BF163A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMDev.Core", "CRMDev.Core\CRMDev.Core.csproj", "{78F6F3DA-24A4-449C-BBBB-82A35BF163A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMDev.Infraestructure", "CRMDev.Infraestructure\CRMDev.Infraestructure.csproj", "{60005534-9475-4FE1-A63A-10301A3C5C0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMDev.Infraestructure", "CRMDev.Infraestructure\CRMDev.Infraestructure.csproj", "{60005534-9475-4FE1-A63A-10301A3C5C0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMDev.Application", "CRMDev.Application\CRMDev.Application.csproj", "{B3CC50F9-DA48-492F-8948-FEBECFD36D5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMDev.Application", "CRMDev.Application\CRMDev.Application.csproj", "{B3CC50F9-DA48-492F-8948-FEBECFD36D5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp2", "BlazorApp2\BlazorApp2.csproj", "{7AC0DC43-CB33-44CB-B400-B609448716AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B3CC50F9-DA48-492F-8948-FEBECFD36D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3CC50F9-DA48-492F-8948-FEBECFD36D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3CC50F9-DA48-492F-8948-FEBECFD36D5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC0DC43-CB33-44CB-B400-B609448716AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC0DC43-CB33-44CB-B400-B609448716AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC0DC43-CB33-44CB-B400-B609448716AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC0DC43-CB33-44CB-B400-B609448716AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

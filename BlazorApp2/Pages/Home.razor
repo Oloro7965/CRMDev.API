@@ -1,0 +1,35 @@
+﻿@page "/"
+
+<PageTitle>Login</PageTitle>
+<MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
+    <h1>Login</h1>
+    <MudItem xs="12" sm="7">
+        <MudPaper class="pa-4">
+            <EditForm Model="loginModel">
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <InputText @bind-Value="loginModel.Email" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="Password" class="form-label">Senha</label>
+                    <InputText @bind-Value="loginModel.Password" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <button class="btn btn-primary">Entrar</button>
+            </EditForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+@code{
+    private LoginModel loginModel = new LoginModel();
+
+    protected override void OnInitialized() => loginModel ??= new();
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
