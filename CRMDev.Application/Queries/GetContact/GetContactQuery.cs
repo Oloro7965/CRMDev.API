@@ -13,8 +13,10 @@ namespace CRMDev.Application.Queries.GetContact
         public GetContactQuery(Guid id)
         {
             Id = id;
+            
         }
 
         public Guid Id { get; private set; }
+        
     }
 }

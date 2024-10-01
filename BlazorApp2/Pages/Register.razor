@@ -1,9 +1,17 @@
-﻿<PageTitle>Register</PageTitle>
+﻿@page "/register"
+@inject NavigationManager navigation
+<PageTitle>Register</PageTitle>
 <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
     <h1>Register</h1>
     <MudItem xs="12" sm="7">
         <MudPaper class="pa-4">
             <EditForm Model="registerModel">
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Nome Completo</label>
+                    <InputText @bind-Value="registerModel.Name" class="form-control w-25">
+
+                    </InputText>
+                </div>
                 <div class="mb-3">
                     <label for="Email" class="form-label">Email</label>
                     <InputText @bind-Value="registerModel.Email" class="form-control w-25">
@@ -16,7 +24,25 @@
 
                     </InputText>
                 </div>
-                <button class="btn btn-primary">Entrar</button>
+                <div class="mb-3">
+                    <label for="PhoneNumber" class="form-label">Telefone</label>
+                    <InputText @bind-Value="registerModel.PhoneNumber" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="Document" class="form-label">CPF</label>
+                    <InputText @bind-Value="registerModel.Document" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="Address" class="form-label">Endereço</label>
+                    <InputText @bind-Value="registerModel.Address" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <button class="btn btn-primary">Cadastrar</button>
             </EditForm>
         </MudPaper>
     </MudItem>
@@ -39,5 +65,7 @@
         public string Document { get; set; }
 
         public string Address { get; set; }
+
+        public Guid FieldWorkId { get; set; }
     }
 }

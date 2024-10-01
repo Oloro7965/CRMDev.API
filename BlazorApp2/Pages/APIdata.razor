@@ -1,0 +1,15 @@
+﻿@page "/APIData"
+
+<PageTitle>Login</PageTitle>
+<MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
+</MudGrid>
+@code{
+    private LoginModel loginModel = new LoginModel();
+
+    protected override void OnInitialized() => loginModel ??= new();
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
