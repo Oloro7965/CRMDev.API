@@ -1,15 +1,33 @@
 ﻿@page "/APIData"
 
-<PageTitle>Login</PageTitle>
-<MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
-</MudGrid>
-@code{
-    private LoginModel loginModel = new LoginModel();
+@inject HttpClient Http
 
-    protected override void OnInitialized() => loginModel ??= new();
-    public class LoginModel
+<h3>teste</h3>
+
+<p>Result:@result</p>
+@code{
+    private bool result;
+
+    protected override async Task OnInitializedAsync()
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+
+        try
+        {
+            var response = await Http.GetAsync("/api/Contacts");
+            if (response.IsSuccessStatusCode)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            
+        }
     }
+
 }

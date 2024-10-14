@@ -1,0 +1,95 @@
+﻿@page "/Contacts"
+@using System.Text.Json
+
+@inject HttpClient Http
+
+@if(contacts==null){
+    <p>No Contacts were found</p>
+}
+else
+{
+     <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <label>
+                        Watched
+                        <input type="checkbox"/>
+                    </label>
+                </th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="editRow">
+                <td class="text-center">
+                    <input type="checkbox"/>
+                </td>
+                <td>
+                    <input/>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-success">
+                        Save
+                    </button>
+                </td>
+            </tr>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    <td class="text-center">
+                    </td>
+                    <td>@contact.Name</td>
+                    <td class="text-center">
+                        <button class="btn btn-warning">
+                            Edit
+                        </button>
+                        <button class="btn btn-danger">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+            <tr id="addRow">
+                <td></td>
+                <td>
+                    <input/>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-success">Add</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@code {
+    private bool result;
+    //private Contacts[]? Contacts;
+    private List<Contact> contacts;
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetAsync("/api/Contacts");
+        var contact = JsonSerializer.Deserialize<List<Contact>>(await response.Content.ReadAsStringAsync(),
+        new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        
+        contacts = contact;
+
+    }
+    public class Contact
+    {
+
+        //[System.Text.Json.Serialization.JsonPropertyName("name")]
+        //public string Name { get; set; }
+        public string Name { get; set; }
+
+        public string Email { get;  set; }
+        //public string Password { get; private set; }
+        
+        public string PhoneNumber { get;  set; }
+
+        
+        public string Occupation { get;  set; }
+
+}
+}
