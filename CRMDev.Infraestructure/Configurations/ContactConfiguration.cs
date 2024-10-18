@@ -24,6 +24,7 @@ namespace CRMDev.Infraestructure.Configurations
                 WithOne(x => x.contact).
                 HasForeignKey(x => x.ContactId).
                 OnDelete(DeleteBehavior.Restrict);
+            //builder.Property(x => x.Password).HasDefaultValue("123456");
 
         }
     }

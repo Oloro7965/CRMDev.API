@@ -1,65 +1,34 @@
 ﻿@page "/Contacts"
 @using System.Text.Json
+@using System.Text.Json.Serialization
+@using BlazorApp2.Models
 
 @inject HttpClient Http
 
-@if(contacts==null){
+@if(contacts is not null && contacts.Count==0){
     <p>No Contacts were found</p>
 }
 else
 {
-     <table class="table">
+    <table class="table">
         <thead>
             <tr>
-                <th class="text-center">
-                    <label>
-                        Watched
-                        <input type="checkbox"/>
-                    </label>
-                </th>
                 <th>Name</th>
-                <th></th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Occupation</th>
             </tr>
         </thead>
         <tbody>
-            <tr id="editRow">
-                <td class="text-center">
-                    <input type="checkbox"/>
-                </td>
-                <td>
-                    <input/>
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-success">
-                        Save
-                    </button>
-                </td>
-            </tr>
-            @foreach (var contact in contacts)
+            @foreach (var c in contacts)
             {
                 <tr>
-                    <td class="text-center">
-                    </td>
-                    <td>@contact.Name</td>
-                    <td class="text-center">
-                        <button class="btn btn-warning">
-                            Edit
-                        </button>
-                        <button class="btn btn-danger">
-                            Delete
-                        </button>
-                    </td>
+                    <td>@c.name</td>
+                    <td>@c.email</td>
+                    <td>@c.phoneNumber</td>
+                    <td>@c.occupation</td>
                 </tr>
             }
-            <tr id="addRow">
-                <td></td>
-                <td>
-                    <input/>
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-success">Add</button>
-                </td>
-            </tr>
         </tbody>
     </table>
 }
@@ -70,10 +39,16 @@ else
     protected override async Task OnInitializedAsync()
     {
         var response = await Http.GetAsync("/api/Contacts");
-        var contact = JsonSerializer.Deserialize<List<Contact>>(await response.Content.ReadAsStringAsync(),
-        new JsonSerializerOptions(JsonSerializerDefaults.Web));
-        
-        contacts = contact;
+        //var res = await response.Content.ReadAsStringAsync();
+        var json = await response.Content.ReadAsStringAsync();
+
+        var contact = JsonSerializer.Deserialize<ResultViewModel<List<Contact>>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        //var res = await response.Content.ReadAsStringAsync();
+        //Console.WriteLine($"{res}");
+        contacts = contact.Data;
 
     }
     public class Contact
@@ -81,15 +56,18 @@ else
 
         //[System.Text.Json.Serialization.JsonPropertyName("name")]
         //public string Name { get; set; }
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string name { get; set; }
 
-        public string Email { get;  set; }
+        [JsonPropertyName("email")]
+        public string email { get;  set; }
         //public string Password { get; private set; }
-        
-        public string PhoneNumber { get;  set; }
 
-        
-        public string Occupation { get;  set; }
+        [JsonPropertyName("phoneNumber")]
+        public string phoneNumber { get;  set; }
+
+        [JsonPropertyName("occupation")]
+        public string occupation { get;  set; }
 
 }
 }
