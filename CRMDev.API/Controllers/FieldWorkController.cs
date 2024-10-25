@@ -2,6 +2,7 @@
 using CRMDev.Application.Commands.DeleteFieldWorkCommand;
 using CRMDev.Application.Commands.UpdateFieldWorkCommand;
 using CRMDev.Application.Queries.GetAllFieldWork;
+using CRMDev.Application.Queries.GetFieldWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -28,6 +29,15 @@ namespace CRMDev.API.Controllers
             var Fields = await _mediator.Send(Query);
 
             return Ok(Fields);
+        }
+        [HttpGet("GetByTitle")]
+        public async Task<IActionResult> GetByTitle([FromQuery] string title)
+        {
+            var Query = new GetFieldWorkQuery(title);
+
+            var Field = await _mediator.Send(Query);
+
+            return Ok(Field.Data);
         }
         //[HttpGet("{id}")]
         //public IActionResult Get()

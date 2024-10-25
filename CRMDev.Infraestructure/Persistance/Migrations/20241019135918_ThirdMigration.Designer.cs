@@ -4,6 +4,7 @@ using CRMDev.Infraestructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRMDev.Infraestructure.Persistance.Migrations
 {
     [DbContext(typeof(CRMDevDbContext))]
-    partial class CRMDevDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019135918_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,12 +56,6 @@ namespace CRMDev.Infraestructure.Persistance.Migrations
                     b.Property<string>("Occupation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("123456");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

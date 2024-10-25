@@ -1,11 +1,15 @@
 ﻿@page "/register"
+@using System.Text.Json
 @inject NavigationManager navigation
+@inject HttpClient Http
+@using System.Text.Json.Serialization
+@using BlazorApp2.Models
 <PageTitle>Register</PageTitle>
 <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
     <h1>Register</h1>
     <MudItem xs="12" sm="7">
         <MudPaper class="pa-4">
-            <EditForm Model="registerModel">
+            <EditForm Model="@registerModel" OnValidSubmit="@HandleValidSubmit">
                 <div class="mb-3">
                     <label for="Name" class="form-label">Nome Completo</label>
                     <InputText @bind-Value="registerModel.Name" class="form-control w-25">
@@ -42,16 +46,61 @@
 
                     </InputText>
                 </div>
-                <button class="btn btn-primary">Cadastrar</button>
+                <div class="mb-3">
+                    <label for="Occupation" class="form-label">Ocupação</label>
+                    <InputText @bind-Value="registerModel.Occupation" class="form-control w-25">
+
+                    </InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="titleSearch" class="form-label">Campo de atuação</label>
+                    <select @bind="titleSearch" id="titleSearch" class="form-control w-25">
+                        @foreach (var field in workfields)
+                        {
+                            <option value="@field.title">@field.title</option>
+                        }
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
             </EditForm>
         </MudPaper>
     </MudItem>
 </MudGrid>
 
 @code {
-    private RegisterModel registerModel = new RegisterModel();
+    private RegisterModel registerModel;
+    private List<FieldWork> workfields;
+    private string titleSearch;
+    protected override async Task OnInitializedAsync()
+    {
+        registerModel = new RegisterModel();
+        var response = await Http.GetAsync("api/FieldWork");
+       
+        var json = await response.Content.ReadAsStringAsync();
 
-    protected override void OnInitialized() => registerModel ??= new();
+        var fields = JsonSerializer.Deserialize<ResultViewModel<List<FieldWork>>>(json, new JsonSerializerOptions
+           {
+                PropertyNameCaseInsensitive = true
+            });
+        workfields = fields.Data;
+
+    }
+    public async Task HandleValidSubmit()
+    {
+        var fieldWorkId = await SearchFieldWorkByTitle(titleSearch);
+        registerModel.FielWorkId = Guid.Parse(fieldWorkId.id);
+        var response=await Http.PostAsJsonAsync("api/Contacts", registerModel);
+        if (response.IsSuccessStatusCode)
+        {
+            registerModel = new RegisterModel();
+        }
+    }
+
+    private async Task<FieldWork> SearchFieldWorkByTitle(string title)
+    {
+        var response = await Http.GetFromJsonAsync<FieldWork>($"api/FieldWork/GetByTitle?title={title}");
+        return response;
+    }
     public class RegisterModel
     {
         public string Email { get; set; }
@@ -66,6 +115,14 @@
 
         public string Address { get; set; }
 
-        public Guid FieldWorkId { get; set; }
+        public Guid FielWorkId { get; set; }
+    }
+    public class FieldWork
+    {
+        [JsonPropertyName("Id")]
+        public string id { get; set; }
+
+        [JsonPropertyName("Title")]
+        public string title { get; set; }
     }
 }

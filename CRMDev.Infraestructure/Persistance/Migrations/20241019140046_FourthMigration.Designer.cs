@@ -4,6 +4,7 @@ using CRMDev.Infraestructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRMDev.Infraestructure.Persistance.Migrations
 {
     [DbContext(typeof(CRMDevDbContext))]
-    partial class CRMDevDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019140046_FourthMigration")]
+    partial class FourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

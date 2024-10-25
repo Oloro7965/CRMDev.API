@@ -22,7 +22,7 @@ namespace CRMDev.Application.Queries.GetAllFieldWork
         {
             var fieldworks = await _fieldWorkRepository.GetAllAsync();
             //var users = _dbcontext.Users.Where(u => u.IsActive.Equals(true));
-            var fieldViewModel = fieldworks.Select(b => new FieldWorkViewModel(b.Title
+            var fieldViewModel = fieldworks.Select(b => new FieldWorkViewModel(b.Id,b.Title
                  ,b.Description))
                  .ToList();
 

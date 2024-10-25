@@ -8,11 +8,12 @@ namespace CRMDev.Core.Domain.Entities
 {
     public class Contact : BaseEntity
     {
-        public Contact(string name, string email, string phoneNumber, string occupation, string document, string address, Guid fielWorkId)
+        public Contact(string name, string email,string password,string phoneNumber, string occupation, string document, string address, Guid fielWorkId)
         {
             Name = name;
 
             Email = email;
+            Password = password;
 
             PhoneNumber = phoneNumber;
 
@@ -35,7 +36,7 @@ namespace CRMDev.Core.Domain.Entities
         public string Name { get; private set; }
 
         public string Email { get; private set; }
-        //public string Password { get; private set; }
+        public string Password { get; private set; }
 
         public string PhoneNumber { get; private set; }
 

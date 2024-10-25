@@ -12,7 +12,7 @@ namespace CRMDev.Core.Domain.Repositories
         Task<List<FieldWork>> GetAllAsync();
 
         Task<FieldWork> GetByIdAsync(Guid id);
-
+        Task<FieldWork> GetByNameAsync(string name);
         Task AddAsync(FieldWork field);
 
         Task SaveChangesAsync();
